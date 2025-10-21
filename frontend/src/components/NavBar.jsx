@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Brukes for navigering til andre sider i programmet.
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Importer ikonkomponenten fra FontAwesome biblioteket.
-import { faSearch } from '@fortawesome/free-solid-svg-icons'; // Importer et ikon fra FontAwesome ikonsett.
+import { faBell } from '@fortawesome/free-solid-svg-icons'; // Importer et ikon fra FontAwesome ikonsett.
 
 // Funksjonell komponent som representerer navigasjonslinjen.
 function NavBar() {
@@ -26,21 +26,27 @@ function NavBar() {
   return (
     <nav>
       <section>
-        {/* Pokeball-ikon */}
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="pokeball" />
+        {/* Logo */}
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/premier-ball.png" alt="LOGO" />
         {/* Lenke til hovedsiden */}
-        <a href="/">UIN POKÉDEX</a>
+        <a href="/">Dashbord</a>
         {/* Lenke til teamsiden */}
-        <a href="/teams">TEAMS</a>
+        <a href="/teams">Team</a>
+        {/* Lenke til mingling */}
+        <a href="/teams">Mingling</a>
+        {/* Lenke til ideér */}
+        <a href="/teams">Ideér</a>
+        {/* Lenke til filer */}
+        <a href="/teams">Filer</a>
+        {/* Lenke til nyheter */}
+        <a href="/teams">Nyheter</a>
+        {/* Lenke til feedback */}
+        <a href="/teams">Feedback</a>
       </section>
       <section>
-        {/* Skjema for søk */}
-        <form onSubmit={handleSubmit} className='search'>
-          {/* Inntastingsfelt for søk */}
-          <input type="text" placeholder="Search for a Pokémon..." value={search} onChange={handleChange} />
-          {/* Knapp for å sende inn søket */}
-          <button type="submit"><FontAwesomeIcon icon={faSearch} /></button>
-        </form>
+          <a href="/teams"><FontAwesomeIcon icon={faBell} /></a>
+          <p>Velkommen, NAVN</p>
+          <img src="../src/assets/img/pfp.jpg" alt="pfp" />
       </section>
     </nav>
   );
