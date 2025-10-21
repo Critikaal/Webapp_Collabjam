@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-export default function Teams() {
+export default function Canvas() {
   const canvasRef = useRef(null);
   const selWidthRef = useRef(null);
   const selColorRef = useRef(null);

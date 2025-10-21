@@ -29,24 +29,24 @@ function NavBar() {
         {/* Logo */}
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/premier-ball.png" alt="LOGO" />
         {/* Lenke til hovedsiden */}
-        <a href="/">Dashbord</a>
+        <a href="/">Dashbord (virker)</a>
         {/* Lenke til teamsiden */}
-        <a href="/teams">Team</a>
+        <a href="/">Team</a>
         {/* Lenke til mingling */}
-        <a href="/teams">Mingling</a>
+        <a href="/">Mingling</a>
         {/* Lenke til ideér */}
-        <a href="/teams">Ideér</a>
+        <a href="/">Ideér</a>
         {/* Lenke til filer */}
-        <a href="/teams">Filer</a>
-        {/* Lenke til nyheter */}
-        <a href="/teams">Nyheter</a>
+        <a href="/">Filer</a>
+        {/* Lenke til Canvas */}
+        <a href="/canvas">Canvas (virker)</a>
         {/* Lenke til feedback */}
-        <a href="/teams">Feedback</a>
+        <a href="/">Feedback</a>
       </section>
       <section className='pfp'>
-          <a href="/teams"><FontAwesomeIcon icon={faBell} /></a>
+          <a href="/"><FontAwesomeIcon icon={faBell} /></a>
           <p>Velkommen, NAVN</p>
-          <img src="../src/assets/img/pfp.jpg" alt="pfp" />
+          <a href="/"><img src="../src/assets/img/pfp.jpg" alt="pfp" /></a>
       </section>
     </nav>
   );
