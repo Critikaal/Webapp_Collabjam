@@ -43,7 +43,7 @@ function NavBar() {
         {/* Lenke til feedback */}
         <a href="/teams">Feedback</a>
       </section>
-      <section>
+      <section className='pfp'>
           <a href="/teams"><FontAwesomeIcon icon={faBell} /></a>
           <p>Velkommen, NAVN</p>
           <img src="../src/assets/img/pfp.jpg" alt="pfp" />
