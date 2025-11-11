@@ -7,25 +7,49 @@ export default function Dashbord() {
           <div className='flex-container'>
             <div>
               <h2>Det nyeste:</h2>
-              <section>
-               <h3>Nytt lag oprettet</h3>
-               <p>navn har opprettet ny gruppe med navn</p>
-               <button>les mer</button>
-               <h3>Nytt lag oprettet</h3>
-               <p>navn har opprettet ny gruppe med navn</p>
-               <button>les mer</button>
-               <h3>Nytt lag oprettet</h3>
-               <p>navn har opprettet ny gruppe med navn</p>
-               <button>les mer</button>
-               <h3>Nytt lag oprettet</h3>
-               <p>navn har opprettet ny gruppe med navn</p>
-               <button>les mer</button>
-            </section>
+              <section className='flex-child-column'>
+                <div>
+                  <h3>Nytt lag oprettet</h3>
+                  <p>navn har opprettet ny gruppe med navn</p>
+                  <button>Les Mer</button>
+                </div>
+                <div>
+                  <h3>Nytt lag oprettet</h3>
+                  <p>navn har opprettet ny gruppe med navn</p>
+                  <button>Les Mer</button>
+                </div>
+                <div>
+                  <h3>Nytt lag oprettet</h3>
+                  <p>navn har opprettet ny gruppe med navn</p>
+                  <button>Les Mer</button>
+                </div>
+                <div>
+                  <h3>Nytt lag oprettet</h3>
+                  <p>navn har opprettet ny gruppe med navn</p>
+                  <button>Les Mer</button>
+                </div>
+              </section>
             </div>  
             <div>
             <h2>Snarveier:</h2>
-            <section>
-              <img src="../src/assets/img/pfp.jpg" alt="" />
+            <section className='flex-child-row'>
+              <div>
+                <h2>Team</h2>
+                <img src="../src/assets/img/pfp.jpg" alt="" />
+              </div>
+              <div>
+                <h2>Søk</h2>
+                <img src="../src/assets/img/pfp.jpg" alt="" />
+              </div>
+              <div>
+                <h2>Filer</h2>
+                <img src="../src/assets/img/pfp.jpg" alt="" />
+              </div>
+              <div>
+                <h2>Ideér</h2>
+                <img src="../src/assets/img/pfp.jpg" alt="" />
+              </div>
+              
             </section>
             </div>
           </div>
