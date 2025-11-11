@@ -373,13 +373,6 @@ export default function Canvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
-  // optional teams array (left in case you use it later)
-  const teams = [
-    { name: "Team Instinct", image: "src/assets/img/instinct.png" },
-    { name: "Team Valor", image: "src/assets/img/valor.png" },
-    { name: "Team Mystic", image: "src/assets/img/mystic.png" },
-  ];
-
   return (
     <>
       <style>
@@ -394,7 +387,14 @@ export default function Canvas() {
 
       <div id="canvas_div" style={{ overflowX: "auto" }}>
         <div className="toolbar" role="toolbar" aria-label="drawing tools">
-          <div>
+          <div value={tool} onClick={(e) => setTool(e.target.value)} class="canvasbuttons">
+            <p>Tools:</p>
+            <button value="pencil">Pencil</button>
+            <button value="line">Line</button>
+            <button value="bucket">Bucket</button>
+            <button value="eraser">Eraser</button>
+          </div>
+          {/* <div>
             <label>Tool: </label>
             <select value={tool} onChange={(e) => setTool(e.target.value)}>
               <option value="pencil">Pencil</option>
@@ -402,7 +402,7 @@ export default function Canvas() {
               <option value="bucket">Bucket</option>
               <option value="eraser">Eraser</option>
             </select>
-          </div>
+          </div> */}
 
           <div>
             <label>Line width:</label>

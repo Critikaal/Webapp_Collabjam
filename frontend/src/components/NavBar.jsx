@@ -31,7 +31,7 @@ function NavBar() {
         {/* Lenke til hovedsiden */}
         <a href="/">Dashbord (virker)</a>
         {/* Lenke til teamsiden */}
-        <a href="/">Team</a>
+        <a href="/team">Team (virker)</a>
         {/* Lenke til mingling */}
         <a href="/">Mingling</a>
         {/* Lenke til ideér */}
