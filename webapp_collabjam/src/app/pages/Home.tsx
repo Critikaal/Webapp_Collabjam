@@ -1,6 +1,11 @@
-import { Welcome } from "./Welcome.js";
+import React, { useState } from 'react';
+import { Layout } from './components/Layout';
+import Dashbord from './components/Dashbord';
 
 export const Home = () => {
-  // _Feel free to delete this element and its import_
-  return <Welcome />;
+  return (
+    <Layout>
+      <Dashbord />
+    </Layout>
+  );
 };

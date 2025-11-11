@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout';
-import Dashbord from './components/Dashbord';
-import Canvas from './components/Canvas';
+import Layout from '../../webapp_collabjam/src/app/pages/components/Layout';
+import Dashbord from '../../webapp_collabjam/src/app/pages/components/Dashbord';
+import Canvas from '../../webapp_collabjam/src/app/pages/components/Canvas';
 
 function App() {
   return (
