@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import '../index.css'
 
 function NavBar() {
   const [search, setSearch] = useState("");
@@ -17,7 +18,7 @@ function NavBar() {
     <nav>
       <section>
         <img
-          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/premier-ball.png"
+          src="../src/app/pages/components/premier-ball.png"
           alt="LOGO"
         />
         <a href="/">Dashbord (virker)</a>
@@ -30,20 +31,10 @@ function NavBar() {
       </section>
 
       <section className="pfp">
-        <form onSubmit={handleSubmit} style={{ display: "inline" }}>
-          <input
-            name="q"
-            type="text"
-            value={search}
-            onChange={handleChange}
-            placeholder="Søk..."
-          />
-          <button type="submit">Søk</button>
-        </form>
 
         <a href="/">🔔</a>
         <p>Velkommen, NAVN</p>
-        <a href="/"><img src="../src/assets/img/pfp.jpg" alt="pfp" /></a>
+        <a href="/"><img src="../src/app/pages/components/pfp.jpg" alt="pfp" /></a>
       </section>
     </nav>
   );

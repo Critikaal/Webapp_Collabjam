@@ -1,4 +1,5 @@
 import React from 'react';
+import '../index.css'
 
 export default function Dashbord() {
   return (
@@ -35,19 +36,19 @@ export default function Dashbord() {
             <section className='flex-child-row'>
               <div>
                 <h2>Team</h2>
-                <img src="../src/assets/img/pfp.jpg" alt="" />
+                <img src="../src/app/pages/components/pfp.jpg" alt="" />
               </div>
               <div>
                 <h2>Søk</h2>
-                <img src="../src/assets/img/pfp.jpg" alt="" />
+                <img src="../src/app/pages/components/pfp.jpg" alt="" />
               </div>
               <div>
                 <h2>Filer</h2>
-                <img src="../src/assets/img/pfp.jpg" alt="" />
+                <img src="../src/app/pages/components/pfp.jpg" alt="" />
               </div>
               <div>
                 <h2>Ideér</h2>
-                <img src="../src/assets/img/pfp.jpg" alt="" />
+                <img src="../src/app/pages/components/pfp.jpg" alt="" />
               </div>
               
             </section>
