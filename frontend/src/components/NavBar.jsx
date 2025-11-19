@@ -1,13 +1,13 @@
 // Importer nødvendige moduler og komponenter fra React og React Router.
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Brukes for navigering til andre sider i programmet.
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Importer ikonkomponenten fra FontAwesome biblioteket.
-import { faBell } from '@fortawesome/free-solid-svg-icons'; // Importer et ikon fra FontAwesome ikonsett.
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Brukes for navigering til andre sider i programmet.
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Importer ikonkomponenten fra FontAwesome biblioteket.
+import { faBell } from "@fortawesome/free-solid-svg-icons"; // Importer et ikon fra FontAwesome ikonsett.
 
 // Funksjonell komponent som representerer navigasjonslinjen.
 function NavBar() {
   // Tilstand for å lagre verdien av søkefeltet.
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   // Hent navigate-funksjonen fra React Router for å navigere til andre sider.
   const navigate = useNavigate();
 
@@ -27,7 +27,10 @@ function NavBar() {
     <nav>
       <section>
         {/* Logo */}
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/premier-ball.png" alt="LOGO" />
+        <img
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/premier-ball.png"
+          alt="LOGO"
+        />
         {/* Lenke til hovedsiden */}
         <a href="/">Dashbord (virker)</a>
         {/* Lenke til teamsiden */}
@@ -43,10 +46,14 @@ function NavBar() {
         {/* Lenke til feedback */}
         <a href="/">Feedback</a>
       </section>
-      <section className='pfp'>
-          <a href="/"><FontAwesomeIcon icon={faBell} /></a>
-          <p>Velkommen, NAVN</p>
-          <a href="/"><img src="../src/assets/img/pfp.jpg" alt="pfp" /></a>
+      <section className="pfp">
+        <a href="/">
+          <FontAwesomeIcon icon={faBell} />
+        </a>
+        <p>Velkommen, NAVN</p>
+        <a href="/">
+          <img src="../src/assets/img/pfp.jpg" alt="pfp" />
+        </a>
       </section>
     </nav>
   );

@@ -2,14 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 
 export default function Canvas() {
   const canvasRef = useRef(null);
-  const selWidthRef = useRef(null);
-  const selColorRef = useRef(null);
+  const lineWidthRef = useRef(13);
+  const colorRef = useRef("blue");
   const ongoingTouchesRef = useRef([]);
   const isDrawingRef = useRef(false);
   const lastPosRef = useRef({ x: 0, y: 0 });
 
   // New:
   const [tool, setTool] = useState("pencil"); // pencil | line | bucket | eraser
+  const [lineWidth, setLineWidth] = useState(13);
   const savedImageRef = useRef(null); // for line preview
   const lineStartRef = useRef(null);
 
@@ -125,8 +126,8 @@ export default function Canvas() {
       lastPosRef.current = pos;
       isDrawingRef.current = true;
 
-      const width = parseFloat(selWidthRef.current?.value) || 1;
-      const color = selColorRef.current?.value || "black";
+      const width = lineWidthRef.current || 1;
+      const color = colorRef.current || "black";
 
       if (tool === "line") {
         // save snapshot for preview
@@ -159,8 +160,8 @@ export default function Canvas() {
         return;
       }
       const pos = getCursorPosFromMouse(e);
-      const width = parseFloat(selWidthRef.current?.value) || 1;
-      const color = selColorRef.current?.value || "black";
+      const width = lineWidthRef.current || 1;
+      const color = colorRef.current || "black";
 
       if (tool === "pencil" || tool === "eraser") {
         drawLineSegment(
@@ -195,8 +196,8 @@ export default function Canvas() {
       if (!isDrawingRef.current) return;
       isDrawingRef.current = false;
       const pos = getCursorPosFromMouse(e);
-      const width = parseFloat(selWidthRef.current?.value) || 1;
-      const color = selColorRef.current?.value || "black";
+      const width = lineWidthRef.current || 1;
+      const color = colorRef.current || "black";
 
       if (tool === "line") {
         // commit final line
@@ -252,13 +253,13 @@ export default function Canvas() {
           lineStartRef.current = pos;
           isDrawingRef.current = true;
         } else if (tool === "bucket") {
-          const color = selColorRef.current?.value || "black";
+          const color = colorRef.current || "black";
           floodFill(pos.x, pos.y, color);
         } else {
           lastPosRef.current = pos;
           isDrawingRef.current = true;
-          const width = parseFloat(selWidthRef.current?.value) || 1;
-          const color = selColorRef.current?.value || "black";
+          const width = lineWidthRef.current || 1;
+          const color = colorRef.current || "black";
           drawLineSegment(
             context,
             pos.x,
@@ -280,8 +281,8 @@ export default function Canvas() {
         const pos = getCursorPosFromTouch(touches[i]);
         if (idx >= 0) {
           if (tool === "pencil" || tool === "eraser") {
-            const width = parseFloat(selWidthRef.current?.value) || 1;
-            const color = selColorRef.current?.value || "black";
+            const width = lineWidthRef.current || 1;
+            const color = colorRef.current || "black";
             drawLineSegment(
               context,
               lastPosRef.current.x,
@@ -295,8 +296,8 @@ export default function Canvas() {
             lastPosRef.current = pos;
           } else if (tool === "line") {
             if (!savedImageRef.current || !lineStartRef.current) continue;
-            const width = parseFloat(selWidthRef.current?.value) || 1;
-            const color = selColorRef.current?.value || "black";
+            const width = lineWidthRef.current || 1;
+            const color = colorRef.current || "black";
             context.putImageData(savedImageRef.current, 0, 0);
             drawLineSegment(
               context,
@@ -321,8 +322,8 @@ export default function Canvas() {
         if (idx >= 0) {
           if (tool === "line") {
             if (savedImageRef.current && lineStartRef.current) {
-              const width = parseFloat(selWidthRef.current?.value) || 1;
-              const color = selColorRef.current?.value || "black";
+              const width = lineWidthRef.current || 1;
+              const color = colorRef.current || "black";
               context.putImageData(savedImageRef.current, 0, 0);
               drawLineSegment(
                 context,
@@ -373,69 +374,137 @@ export default function Canvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
+  function handleColorClick(color) {
+    colorRef.current = color;
+  }
+
+  function changeLineWidth(delta) {
+    setLineWidth((prev) => {
+      let next = prev + delta;
+      if (next < 1) next = 1;
+      if (next > 50) next = 50;
+      lineWidthRef.current = next;
+      return next;
+    });
+  }
+
   return (
     <>
-      <style>
-        {`
-          #canvas_div { text-align: center; display: block; margin-left: auto; margin-right: auto; }
-          canvas { border: 2px solid black; touch-action: none; }
-          .toolbar { display:flex; gap:8px; align-items:center; justify-content:center; margin-bottom:8px; }
-          .tool-btn { padding:6px 8px; border:1px solid #ccc; background:#fff; cursor:pointer; }
-          .tool-btn.active { border-color:#000; font-weight:600; }
-        `}
-      </style>
+      <div className="idea-page">
+        <h1 className="idea-title">{`{idénavn}`}</h1>
 
-      <div id="canvas_div" style={{ overflowX: "auto" }}>
-        <div className="toolbar" role="toolbar" aria-label="drawing tools">
-          <div value={tool} onClick={(e) => setTool(e.target.value)} class="canvasbuttons">
-            <p>Tools:</p>
-            <button value="pencil">Pencil</button>
-            <button value="line">Line</button>
-            <button value="bucket">Bucket</button>
-            <button value="eraser">Eraser</button>
+        <div className="idea-layout">
+          {/* LEFT TOOLS PANEL */}
+          <div className="tools-panel">
+            <p className="tools-label">Tools:</p>
+
+            <div className="toolbar" role="toolbar" aria-label="drawing tools">
+              <button
+                type="button"
+                className={`tool-btn ${tool === "pencil" ? "active" : ""}`}
+                onClick={() => setTool("pencil")}
+                title="Pencil Tool"
+              >
+                ✏️
+              </button>
+
+              <button
+                type="button"
+                className={`tool-btn ${tool === "line" ? "active" : ""}`}
+                onClick={() => setTool("line")}
+                title="Line Tool"
+              >
+                ／
+              </button>
+
+              <button
+                type="button"
+                className={`tool-btn ${tool === "bucket" ? "active" : ""}`}
+                onClick={() => setTool("bucket")}
+                title="Fill / Bucket Tool"
+              >
+                🪣
+              </button>
+
+              <button
+                type="button"
+                className={`tool-btn ${tool === "eraser" ? "active" : ""}`}
+                onClick={() => setTool("eraser")}
+                title="Eraser Tool"
+              >
+                ⌫
+              </button>
+            </div>
+
+            <div className="tool-controls">
+              <div className="line-width-control">
+                <label htmlFor="lineWidth">Line width:</label>
+                <div className="line-width-inner">
+                  <button type="button" onClick={() => changeLineWidth(-1)}>
+                    -
+                  </button>
+                  <span id="lineWidth">{lineWidth}</span>
+                  <button type="button" onClick={() => changeLineWidth(1)}>
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <button type="button" onClick={clearArea}>
+                Clear Area
+              </button>
+            </div>
           </div>
-          {/* <div>
-            <label>Tool: </label>
-            <select value={tool} onChange={(e) => setTool(e.target.value)}>
-              <option value="pencil">Pencil</option>
-              <option value="line">Line</option>
-              <option value="bucket">Bucket</option>
-              <option value="eraser">Eraser</option>
-            </select>
-          </div> */}
 
-          <div>
-            <label>Line width:</label>
-            <select id="selWidth" ref={selWidthRef} defaultValue="13">
-              <option value="3">3</option>
-              <option value="8">8</option>
-              <option value="13">13</option>
-              <option value="20">20</option>
-            </select>
-          </div>
+          {/* CENTER CANVAS */}
+          <div className="canvas-column">
+            <div
+              id="canvas_div"
+              className="canvas-frame"
+              style={{ overflowX: "auto" }}
+            >
+              <canvas id="canvas" ref={canvasRef} width={900} height={360} />
+            </div>
 
-          <div>
-            <label>Color:</label>
-            <select id="selColor" ref={selColorRef} defaultValue="blue">
-              <option value="black">black</option>
-              <option value="blue">blue</option>
-              <option value="red">red</option>
-              <option value="green">green</option>
-              <option value="yellow">yellow</option>
-              <option value="gray">gray</option>
-              <option value="white">white</option>
-            </select>
-          </div>
-
-          <div>
-            <button type="button" onClick={clearArea}>
-              Clear Area
-            </button>
+            <div className="color-row">
+              <button
+                type="button"
+                className="color-swatch color-black"
+                onClick={() => handleColorClick("black")}
+              />
+              <button
+                type="button"
+                className="color-swatch color-blue"
+                onClick={() => handleColorClick("blue")}
+              />
+              <button
+                type="button"
+                className="color-swatch color-red"
+                onClick={() => handleColorClick("red")}
+              />
+              <button
+                type="button"
+                className="color-swatch color-green"
+                onClick={() => handleColorClick("green")}
+              />
+              <button
+                type="button"
+                className="color-swatch color-yellow"
+                onClick={() => handleColorClick("yellow")}
+              />
+              <button
+                type="button"
+                className="color-swatch color-gray"
+                onClick={() => handleColorClick("gray")}
+              />
+              <button
+                type="button"
+                className="color-swatch color-white"
+                onClick={() => handleColorClick("white")}
+              />
+            </div>
           </div>
         </div>
-
-        <canvas id="canvas" ref={canvasRef} width={900} height={360} />
-        <div style={{ marginTop: 8 }} />
       </div>
     </>
   );

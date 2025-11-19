@@ -1,9 +1,9 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout';
-import Dashbord from './components/Dashbord';
-import Canvas from './components/Canvas';
-import Team from './components/Team';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import Dashbord from "./components/Dashbord";
+import Canvas from "./components/Canvas";
+import Team from "./components/Team";
 
 function App() {
   return (
