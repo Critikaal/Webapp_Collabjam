@@ -71,6 +71,23 @@ nav {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
 
+  /* Navigation helper classes for hamburger behavior */
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   
 }
 
@@ -322,7 +339,10 @@ main {
     flex-direction: column;
     align-items: flex-start;
   }
-
+    section { padding: 6px 8px; flex-wrap: wrap; }
+    .nav-toggle { display: block; }
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; gap: 6px; padding-top: 8px; }
   main {
     article {
       flex-direction: column;
@@ -338,6 +358,72 @@ main {
       height: 80px;
     }
   }
+}
+
+/* Responsive improvements for header, content and canvas */
+@media (max-width: 1024px) {
+  nav {
+    padding: 8px;
+    a {
+      margin-right: 16px;
+      font-size: 18px;
+    }
+    img {
+      min-width: 36px;
+      min-height: 36px;
+    }
+  }
+
+  main {
+    padding: 16px;
+    .flex-container { gap: 24px; }
+  }
+}
+
+@media (max-width: 600px) {
+  /* Stack nav links and reduce spacing */
+  nav {
+    flex-direction: column;
+    align-items: stretch;
+    section { padding: 6px 8px; flex-wrap: wrap; }
+    a { margin: 6px 8px; font-size: 16px; }
+  }
+
+  /* Main content becomes single column and fills width */
+  main {
+    padding: 12px;
+    border-radius: 8px;
+    .flex-container { flex-direction: column; gap: 16px; }
+    .flex-child-row, .flex-child-column { max-width: 100%; }
+    .pokemon-list article { flex-basis: 100%; max-width: 100%; }
+  }
+
+  /* Canvas & toolbar responsive rules */
+  #canvas_div {
+    width: 100%;
+    padding: 0 8px;
+  }
+
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 900px;
+  }
+
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    button, select { flex: 1 1 auto; min-width: 80px; }
+  }
+}
+
+/* Small screens: tighten typography */
+@media (max-width: 420px) {
+  nav a { font-size: 14px; margin: 6px 6px; }
+  main { padding: 10px; }
+  .toolbar { gap: 6px; }
 }
 
 /* Type Farger */
@@ -488,4 +574,39 @@ main {
 
 .unknown, .shadow {
   visibility: hidden;
+}
+
+/* Global button interaction styles */
+a,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+  will-change: transform, box-shadow;
+}
+
+a:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  filter: brightness(1.03);
+}
+
+a:active,
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+a:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus {
+  outline: 3px solid rgba(96, 159, 255, 0.35);
+  outline-offset: 2px;
 }

@@ -4,9 +4,7 @@ import { defineApp } from "rwsdk/worker";
 import { Document } from "./app/Document";
 import { setCommonHeaders } from "./app/headers";
 import { Home } from "./app/pages/Home";
-import { Canvas } from "./app/pages/Canvas";
-import '../src/app/pages/index.css'
-
+import Canvas from "./app/pages/Canvas";
 export type AppContext = {};
 
 export default defineApp([
