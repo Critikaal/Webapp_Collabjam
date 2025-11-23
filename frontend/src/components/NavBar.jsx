@@ -32,26 +32,28 @@ function NavBar() {
           alt="LOGO"
         />
         {/* Lenke til hovedsiden */}
-        <a href="/">Dashbord (virker)</a>
+        <a href="/">Dashbord</a>
         {/* Lenke til teamsiden */}
-        <a href="/team">Team (virker)</a>
+        <a href="/team">Team</a>
         {/* Lenke til mingling */}
-        <a href="/">Mingling</a>
+        <a href="/Mingling">Mingling</a>
         {/* Lenke til ideér */}
-        <a href="/">Ideér</a>
+        <a href="/Ideer">Ideér</a>
         {/* Lenke til filer */}
-        <a href="/">Filer</a>
+        <a href="/Filer">Filer</a>
         {/* Lenke til Canvas */}
-        <a href="/canvas">Canvas (virker)</a>
+        <a href="/canvas">Canvas</a>
         {/* Lenke til feedback */}
-        <a href="/">Feedback</a>
+        <a href="/Feedback">Feedback</a>
       </section>
       <section className="pfp">
         <a href="/">
           <FontAwesomeIcon icon={faBell} />
         </a>
-        <p>Velkommen, NAVN</p>
-        <a href="/">
+        <a href="/Profil">
+          <p>Velkommen, NAVN</p>
+        </a>
+        <a href="/Profil">
           <img src="../src/assets/img/pfp.jpg" alt="pfp" />
         </a>
       </section>

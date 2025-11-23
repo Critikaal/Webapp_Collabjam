@@ -403,7 +403,7 @@ export default function Canvas() {
                 type="button"
                 className={`tool-btn ${tool === "pencil" ? "active" : ""}`}
                 onClick={() => setTool("pencil")}
-                title="Pencil Tool"
+                data-tooltip="Pencil"
               >
                 ✏️
               </button>
@@ -412,7 +412,7 @@ export default function Canvas() {
                 type="button"
                 className={`tool-btn ${tool === "line" ? "active" : ""}`}
                 onClick={() => setTool("line")}
-                title="Line Tool"
+                data-tooltip="Line"
               >
                 ／
               </button>
@@ -421,7 +421,7 @@ export default function Canvas() {
                 type="button"
                 className={`tool-btn ${tool === "bucket" ? "active" : ""}`}
                 onClick={() => setTool("bucket")}
-                title="Fill / Bucket Tool"
+                data-tooltip="Fill"
               >
                 🪣
               </button>
@@ -430,7 +430,7 @@ export default function Canvas() {
                 type="button"
                 className={`tool-btn ${tool === "eraser" ? "active" : ""}`}
                 onClick={() => setTool("eraser")}
-                title="Eraser Tool"
+                data-tooltip="Eraser"
               >
                 ⌫
               </button>
