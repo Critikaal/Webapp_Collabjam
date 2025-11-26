@@ -99,7 +99,6 @@ nav {
     min-height: 40px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-<<<<<<< HEAD:src/app/pages/index.scss
 
   /* Navigation helper classes for hamburger behavior */
   .nav-toggle {
@@ -117,10 +116,6 @@ nav {
     align-items: center;
     gap: 8px;
   }
-
-  
-=======
->>>>>>> New_content:frontend/src/index.scss
 }
 
 /* Main Content Stil */
@@ -509,7 +504,6 @@ main {
     text-align: center;
     display: flex;
     flex-direction: column;
-<<<<<<< HEAD:src/app/pages/index.scss
     align-items: flex-start;
   }
   section {
@@ -532,13 +526,6 @@ main {
     article {
       flex-direction: column;
       align-items: center;
-=======
-    gap: 8px;
-
-    h3 {
-      font-size: 14px;
-      margin: 0;
->>>>>>> New_content:frontend/src/index.scss
     }
 
     img {
@@ -550,7 +537,6 @@ main {
   }
 }
 
-<<<<<<< HEAD:src/app/pages/index.scss
 /* Responsive improvements for header, content and canvas */
 @media (max-width: 1024px) {
   nav {
@@ -646,9 +632,6 @@ main {
 }
 
 /* Type Farger */
-=======
-/* canvas  */
->>>>>>> New_content:frontend/src/index.scss
 
 /* Idea canvas page */
 .idea-page {
