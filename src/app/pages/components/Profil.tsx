@@ -7,7 +7,7 @@ export default function Profile() {
       <div className="card profile-header">
         <img
           className="profile-avatar"
-          src="../src/assets/img/pfp.jpg"
+          src="../pages/img/pfp.jpg"
           alt="Profilbilde"
         />
 

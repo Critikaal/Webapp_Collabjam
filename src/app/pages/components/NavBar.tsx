@@ -1,4 +1,6 @@
 "use client";
+
+
 import React, { useState, useEffect } from "react";
 function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,7 +20,7 @@ function NavBar() {
     <nav>
       <section className="nav-left">
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <a href="/"><img src="../src/app/pages/components/premier-ball.png" alt="LOGO" /></a>
+          <a href="/"><img src="../src/app/pages/img/logo.png" alt="LOGO" /></a>
         </div>
 
         <button
@@ -32,12 +34,12 @@ function NavBar() {
 
         {(!isMobile || menuOpen) && (
           <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-            <a href="/" onClick={() => setMenuOpen(false)}>Dashbord (virker)</a>
+            <a href="/" onClick={() => setMenuOpen(false)}>Dashbord</a>
             <a href="/team" onClick={() => setMenuOpen(false)}>Team</a>
             <a href="/mingle" onClick={() => setMenuOpen(false)}>Mingling</a>
             <a href="/idea" onClick={() => setMenuOpen(false)}>Ideér</a>
             <a href="/files" onClick={() => setMenuOpen(false)}>Filer</a>
-            <a href="/canvas" onClick={() => setMenuOpen(false)}>Canvas (virker)</a>
+            <a href="/canvas" onClick={() => setMenuOpen(false)}>Canvas</a>
             <a href="/feedback" onClick={() => setMenuOpen(false)}>Feedback</a>
           </div>
         )}
@@ -45,7 +47,7 @@ function NavBar() {
       <section className="pfp">
         <a href="/">🔔</a>
         <p>Velkommen, "name"</p>
-        <a href="/"><img src="../src/app/pages/components/pfp.jpg" alt="pfp" /></a>
+        <a href="/profile"><img src="../src/app/pages/components/pfp.jpg" alt="pfp" /></a>
       </section>
     </nav>
   );

@@ -11,6 +11,7 @@ export const Document: React.FC<{ children: React.ReactNode }> = ({
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>Collabjam</title>
       <link rel="modulepreload" href="/src/client.tsx" />
+      <link rel="icon" type="image/x-icon" href="../src/app/pages/img/logo.png"></link>
     </head>
     <body>
       <div id="root">

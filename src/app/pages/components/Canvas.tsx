@@ -37,13 +37,129 @@ export default function Canvas() {
       }
     };
 
+    const cssColorToRGBA = (css: string): [number, number, number, number] => {
+      const tmp = document.createElement("canvas");
+      tmp.width = tmp.height = 1;
+      const tctx = tmp.getContext("2d")!;
+      tctx.fillStyle = css;
+      tctx.fillRect(0, 0, 1, 1);
+      const d = tctx.getImageData(0, 0, 1, 1).data;
+      return [d[0], d[1], d[2], d[3]];
+    };
+
+    const floodFill = (sx: number, sy: number, fillCss: string) => {
+      const w = canvas.width;
+      const h = canvas.height;
+      const img = ctx.getImageData(0, 0, w, h);
+      const data = img.data;
+
+      const ix = Math.max(0, Math.min(w - 1, Math.floor(sx)));
+      const iy = Math.max(0, Math.min(h - 1, Math.floor(sy)));
+      const startIdx = (iy * w + ix) * 4;
+
+      const target = [
+        data[startIdx],
+        data[startIdx + 1],
+        data[startIdx + 2],
+        data[startIdx + 3],
+      ] as [number, number, number, number];
+
+      const fill = cssColorToRGBA(fillCss);
+
+      // no-op if target already equals fill color
+      if (
+        target[0] === fill[0] &&
+        target[1] === fill[1] &&
+        target[2] === fill[2] &&
+        target[3] === fill[3]
+      ) {
+        return;
+      }
+
+      const stack: Array<{ x: number; y: number }> = [{ x: ix, y: iy }];
+
+      const match = (idx: number) =>
+        data[idx] === target[0] &&
+        data[idx + 1] === target[1] &&
+        data[idx + 2] === target[2] &&
+        data[idx + 3] === target[3];
+
+      const set = (idx: number) => {
+        data[idx] = fill[0];
+        data[idx + 1] = fill[1];
+        data[idx + 2] = fill[2];
+        data[idx + 3] = fill[3];
+      };
+
+      while (stack.length) {
+        const { x, y } = stack.pop()!;
+        let nx = x;
+        let idx = (y * w + nx) * 4;
+
+        // move left to segment start
+        while (nx >= 0 && match(idx)) {
+          nx--;
+          idx -= 4;
+        }
+        nx++;
+        idx += 4;
+
+        let spanUp = false;
+        let spanDown = false;
+
+        // fill rightward and push vertical neighbors
+        while (nx < w && match(idx)) {
+          set(idx);
+
+          // up
+          if (y > 0) {
+            const upIdx = ((y - 1) * w + nx) * 4;
+            if (match(upIdx)) {
+              if (!spanUp) {
+                stack.push({ x: nx, y: y - 1 });
+                spanUp = true;
+              }
+            } else if (spanUp) {
+              spanUp = false;
+            }
+          }
+
+          // down
+          if (y < h - 1) {
+            const dnIdx = ((y + 1) * w + nx) * 4;
+            if (match(dnIdx)) {
+              if (!spanDown) {
+                stack.push({ x: nx, y: y + 1 });
+                spanDown = true;
+              }
+            } else if (spanDown) {
+              spanDown = false;
+            }
+          }
+
+          nx++;
+          idx += 4;
+        }
+      }
+
+      ctx.putImageData(img, 0, 0);
+    };
+
     const onDown = (evt: MouseEvent | TouchEvent) => {
       evt.preventDefault();
       const p = getPos(evt);
       isDrawingRef.current = true;
       lastPosRef.current = p;
+
+      if (tool === "bucket") {
+        floodFill(p.x, p.y, strokeColor);
+        isDrawingRef.current = false;
+        return;
+      }
+
       if (tool === "line") {
         lineStartRef.current = p;
+      
       } else if (tool === "pencil" || tool === "eraser") {
         ctx.strokeStyle = tool === "eraser" ? "white" : strokeColor;
         ctx.lineWidth = lineWidth;
@@ -82,6 +198,8 @@ export default function Canvas() {
       }
       isDrawingRef.current = false;
     };
+
+    
 
     // mouse
     canvas.addEventListener("mousedown", onDown as any);

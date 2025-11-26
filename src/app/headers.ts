@@ -1,5 +1,5 @@
 import { RouteMiddleware } from "rwsdk/router";
-
+import "./pages/index.scss";
 export const setCommonHeaders =
   (): RouteMiddleware =>
   ({ response, rw: { nonce } }) => {
