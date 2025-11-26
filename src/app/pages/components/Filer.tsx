@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function Files() {
   return (
@@ -56,8 +55,8 @@ export default function Files() {
 
         <div className="card">
           <h2>Last opp</h2>
-          <p>Dra filer hit eller trykk knappen.</p>
-          <button>Velg filer</button>
+          <p>Dra filer hit eller trykk på knappen.</p>
+          <button style={{alignSelf: "center"}}>Velg filer</button>
         </div>
       </div>
     </div>

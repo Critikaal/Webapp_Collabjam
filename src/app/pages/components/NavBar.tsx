@@ -1,7 +1,7 @@
 "use client";
 
 
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -18,37 +18,37 @@ function NavBar() {
 
   return (
     <nav>
-      <section className="nav-left">
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <a href="/"><img src="../src/app/pages/img/logo.png" alt="LOGO" /></a>
-        </div>
-
-        <button
-          className="nav-toggle"
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </button>
-
-        {(!isMobile || menuOpen) && (
-          <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-            <a href="/" onClick={() => setMenuOpen(false)}>Dashbord</a>
-            <a href="/team" onClick={() => setMenuOpen(false)}>Team</a>
-            <a href="/mingle" onClick={() => setMenuOpen(false)}>Mingling</a>
-            <a href="/idea" onClick={() => setMenuOpen(false)}>Ideér</a>
-            <a href="/files" onClick={() => setMenuOpen(false)}>Filer</a>
-            <a href="/canvas" onClick={() => setMenuOpen(false)}>Canvas</a>
-            <a href="/feedback" onClick={() => setMenuOpen(false)}>Feedback</a>
+        <section className="nav-left">
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <a href="/"><img src="../src/app/pages/img/logo.png" alt="LOGO" /></a>
           </div>
-        )}
-      </section>
-      <section className="pfp">
-        <a href="/">🔔</a>
-        <p>Velkommen, "name"</p>
-        <a href="/profile"><img src="../src/app/pages/components/pfp.jpg" alt="pfp" /></a>
-      </section>
+
+          <button
+            className="nav-toggle"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            ☰
+          </button>
+
+          {(!isMobile || menuOpen) && (
+            <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+              <a href="/" onClick={() => setMenuOpen(false)}>Dashbord</a>
+              <a href="/team" onClick={() => setMenuOpen(false)}>Team</a>
+              <a href="/mingle" onClick={() => setMenuOpen(false)}>Mingling</a>
+              <a href="/idea" onClick={() => setMenuOpen(false)}>Ideér</a>
+              <a href="/files" onClick={() => setMenuOpen(false)}>Filer</a>
+              <a href="/canvas" onClick={() => setMenuOpen(false)}>Canvas</a>
+              <a href="/feedback" onClick={() => setMenuOpen(false)}>Feedback</a>
+            </div>
+          )}
+        </section>
+        <section className="pfp">
+          <a href="/">🔔</a>
+          <p>Velkommen, "name"</p>
+          <a href="/profile"><img src="../src/app/pages/img/pfp.jpg" alt="pfp" /></a>
+        </section>
     </nav>
   );
 }

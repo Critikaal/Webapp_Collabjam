@@ -238,6 +238,48 @@ export default function Canvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
+  function saveImage(filename = 'canvas.png') {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    // create a temporary download link
+    const url = canvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    // for Firefox compatibility, append to DOM
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  async function copyToClipboard() {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    try {
+      // Prefer modern Clipboard API with image support
+      const blob = await new Promise<Blob | null>((resolve) =>
+        canvas.toBlob((b) => resolve(b), 'image/png')
+      );
+      if (!blob) throw new Error('Failed to create image blob');
+
+      // Some browsers require ClipboardItem
+      const item = new ClipboardItem({ 'image/png': blob });
+      await navigator.clipboard.write([item]);
+      console.log('Canvas copied to clipboard.');
+    } catch (err) {
+      console.warn('Clipboard image write failed, falling back to text:', err);
+      try {
+        // Fallback: copy data URL as text
+        await navigator.clipboard.writeText(canvas.toDataURL('image/png'));
+        console.log('Canvas data URL copied to clipboard.');
+      } catch (err2) {
+        console.error('Clipboard write failed:', err2);
+        alert('Could not copy image to clipboard in this browser.');
+      }
+    }
+  }
+
   return (
     <>
       <div className="idea-page">
@@ -300,8 +342,14 @@ export default function Canvas() {
                 </div>
               </div>
 
-              <button type="button" onClick={clearArea}>
+              <button className="red" type="button" onClick={clearArea}>
                 Clear Area
+              </button>
+              <button className="green" type="button" onClick={() => saveImage()}>
+                Save Image
+              </button>
+              <button className="blue" type="button" onClick={copyToClipboard}>
+                Copy to Clipboard
               </button>
             </div>
           </div>

@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function Profile() {
   return (
@@ -7,7 +6,7 @@ export default function Profile() {
       <div className="card profile-header">
         <img
           className="profile-avatar"
-          src="../pages/img/pfp.jpg"
+          src="../src/app/pages/img/pfp.jpg"
           alt="Profilbilde"
         />
 
