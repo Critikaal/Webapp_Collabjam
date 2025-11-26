@@ -512,10 +512,22 @@ main {
 <<<<<<< HEAD:src/app/pages/index.scss
     align-items: flex-start;
   }
-    section { padding: 6px 8px; flex-wrap: wrap; }
-    .nav-toggle { display: block; }
-    .nav-links { display: none; }
-    .nav-links.open { display: flex; flex-direction: column; gap: 6px; padding-top: 8px; }
+  section {
+    padding: 6px 8px;
+    flex-wrap: wrap;
+  }
+  .nav-toggle {
+    display: block;
+  }
+  .nav-links {
+    display: none;
+  }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 8px;
+  }
   main {
     article {
       flex-direction: column;
@@ -555,7 +567,9 @@ main {
 
   main {
     padding: 16px;
-    .flex-container { gap: 24px; }
+    .flex-container {
+      gap: 24px;
+    }
   }
 }
 
@@ -564,17 +578,32 @@ main {
   nav {
     flex-direction: column;
     align-items: stretch;
-    section { padding: 6px 8px; flex-wrap: wrap; }
-    a { margin: 6px 8px; font-size: 16px; }
+    section {
+      padding: 6px 8px;
+      flex-wrap: wrap;
+    }
+    a {
+      margin: 6px 8px;
+      font-size: 16px;
+    }
   }
 
   /* Main content becomes single column and fills width */
   main {
     padding: 12px;
     border-radius: 8px;
-    .flex-container { flex-direction: column; gap: 16px; }
-    .flex-child-row, .flex-child-column { max-width: 100%; }
-    .pokemon-list article { flex-basis: 100%; max-width: 100%; }
+    .flex-container {
+      flex-direction: column;
+      gap: 16px;
+    }
+    .flex-child-row,
+    .flex-child-column {
+      max-width: 100%;
+    }
+    .pokemon-list article {
+      flex-basis: 100%;
+      max-width: 100%;
+    }
   }
 
   /* Canvas & toolbar responsive rules */
@@ -594,15 +623,26 @@ main {
     flex-wrap: wrap;
     gap: 8px;
     justify-content: center;
-    button, select { flex: 1 1 auto; min-width: 80px; }
+    button,
+    select {
+      flex: 1 1 auto;
+      min-width: 80px;
+    }
   }
 }
 
 /* Small screens: tighten typography */
 @media (max-width: 420px) {
-  nav a { font-size: 14px; margin: 6px 6px; }
-  main { padding: 10px; }
-  .toolbar { gap: 6px; }
+  nav a {
+    font-size: 14px;
+    margin: 6px 6px;
+  }
+  main {
+    padding: 10px;
+  }
+  .toolbar {
+    gap: 6px;
+  }
 }
 
 /* Type Farger */

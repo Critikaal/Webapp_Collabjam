@@ -145,6 +145,9 @@ export default function Canvas() {
     <div id="canvas_div" style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto', overflowX: 'auto' }}>
       <div className="toolbar" role="toolbar" aria-label="drawing tools" style={{ marginBottom: 8 }}>
         <button type="button" onClick={clearArea}>Clear Area</button>
+        <button type="button" onClick={() => saveImage()}>Save PNG</button>
+        <button type="button" onClick={() => copyToClipboard()}>Copy</button>
+        <button type="button" onClick={() => uploadCanvas()}>Upload</button>
         <span style={{ marginLeft: 12 }}>Line width: </span>
         <select id="selWidth" ref={selWidthRef} defaultValue="13" style={{ marginLeft: 6 }}>
           <option value="11">11</option>
@@ -162,7 +165,76 @@ export default function Canvas() {
         </select>
       </div>
 
-      <canvas id="canvas" ref={canvasRef} width={900} height={360} style={{ border: '2px solid black' }} />
+      <div className="canvas-container">
+        <canvas id="canvas" ref={canvasRef} width={900} height={360} style={{ border: '2px solid black' }} />
+      </div>
     </div>
   );
+}
+
+// Downloads the canvas as a PNG file
+async function saveImage() {
+  const canvas = document.getElementById('canvas') as HTMLCanvasElement | null;
+  if (!canvas) {
+    alert('Canvas not available');
+    return;
+  }
+
+  // toBlob is async-friendly
+  canvas.toBlob((blob) => {
+    if (!blob) {
+      alert('Failed to create image');
+      return;
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'canvas.png';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }, 'image/png');
+}
+
+// Copy canvas image to clipboard (supported in modern browsers)
+async function copyToClipboard() {
+  try {
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement | null;
+    if (!canvas) throw new Error('Canvas not found');
+    const blob = await new Promise<Blob | null>((res) => canvas.toBlob(res, 'image/png'));
+    if (!blob) throw new Error('Could not create image blob');
+    // @ts-ignore - ClipboardItem may not exist in older TS libs
+    await (navigator.clipboard as any).write([new ClipboardItem({ 'image/png': blob })]);
+    alert('Image copied to clipboard');
+  } catch (err) {
+    console.error(err);
+    alert('Copy to clipboard failed: ' + (err as Error).message);
+  }
+}
+
+// Upload canvas PNG to server endpoint. Requires a server route to accept the POST.
+async function uploadCanvas() {
+  try {
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement | null;
+    if (!canvas) throw new Error('Canvas not found');
+    const blob = await new Promise<Blob | null>((res) => canvas.toBlob(res, 'image/png'));
+    if (!blob) throw new Error('Could not create image blob');
+
+    const fd = new FormData();
+    fd.append('file', blob, 'canvas.png');
+
+    const resp = await fetch('/api/upload', {
+      method: 'POST',
+      body: fd,
+    });
+
+    if (!resp.ok) throw new Error('Upload failed: ' + resp.statusText);
+    const data = await resp.json().catch(() => ({}));
+    alert('Upload successful');
+    console.log('Upload response', data);
+  } catch (err) {
+    console.error(err);
+    alert('Upload failed: ' + (err as Error).message);
+  }
 }
