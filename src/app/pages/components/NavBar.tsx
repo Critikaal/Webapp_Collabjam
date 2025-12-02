@@ -1,7 +1,8 @@
 "use client";
 
-
 import { useEffect, useState } from "react";
+import { getRandomProfile } from "../../actions/profile";
+
 function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -15,6 +16,31 @@ function NavBar() {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  type ProfileRow = {
+    id: number;
+    displayName: string;
+    role: string | null;
+    avatarKey: string;
+  };
+  
+  // 🔹 Nå peker vi direkte på filer i /public/avatars
+  const avatarMap: Record<string, string> = {
+    pfp1: "/avatars/pfp1.jpg", // eller .jpg hvis det er filtype
+    pfp2: "/avatars/pfp2.jpg",
+    pfp3: "/avatars/pfp3.jpg",
+  };
+  
+  const [profile, setProfile] = useState<ProfileRow | null>(null);
+
+  useEffect(() => {
+    getRandomProfile().then((p) => {
+      setProfile(p as ProfileRow);
+    });
+  }, []);
+
+  const avatarSrc =
+    (profile && avatarMap[profile.avatarKey]) || "/avatars/pfp1.jpg";
 
   return (
     <nav>
@@ -46,8 +72,8 @@ function NavBar() {
         </section>
         <section className="pfp">
           <a href="/">🔔</a>
-          <p>Velkommen, "name"</p>
-          <a href="/profile"><img src="../src/app/pages/img/pfp.jpg" alt="pfp" /></a>
+          <p>Velkommen, {profile?.displayName ?? "Oskar"}</p>
+          <a href="/profile"><img src={avatarSrc} alt="pfp" /></a>
         </section>
     </nav>
   );

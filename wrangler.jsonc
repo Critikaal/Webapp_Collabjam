@@ -1,29 +1,26 @@
 {
-  // Schema reference for wrangler configuration
-  "$schema": "node_modules/wrangler/config-schema.json",
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "collabjam",
+	"main": "src/worker.tsx",
+	"compatibility_date": "2025-08-21",
+	"compatibility_flags": ["nodejs_compat"],
 
-  // Name of your worker
-  "name": "__change_me__",
+	"assets": {
+		"binding": "ASSETS"
+	},
 
-  // Entry point for your worker
-  "main": "src/worker.tsx",
+	"observability": {
+		"enabled": true
+	},
 
-  // Compatibility settings
-  "compatibility_date": "2025-08-21",
-  "compatibility_flags": ["nodejs_compat"],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "collabjam-db",
+			"database_id": "f02038f4-2dc2-4a65-ab4a-3750032332c5",
+			"migrations_dir": "drizzle"
+		}
+	],
 
-  // Assets configuration
-  "assets": {
-    "binding": "ASSETS"
-  },
-
-  // Observability settings
-  "observability": {
-    "enabled": true
-  },
-
-  // Environment variables
-  "vars": {
-    // Add your environment variables here
-  }
+	"vars": {}
 }

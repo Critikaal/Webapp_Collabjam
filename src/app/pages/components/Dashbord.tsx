@@ -45,22 +45,22 @@ export default function Dashboard() {
           <h2>Snarveier:</h2>
 
           <div className="shortcut-grid">
-            <div className="shortcut">
-              <h3>Team</h3>
-              <img src="../src/assets/img/pfp.jpg" alt="Team" />
-            </div>
+            <a className="shortcut" href="/canvas">
+              <h3>Tegn</h3>
+              <img src="../src/app/pages/img/pen.png" alt="Tegn" />
+            </a>
             <div className="shortcut">
               <h3>Søk</h3>
-              <img src="../src/assets/img/pfp.jpg" alt="Søk" />
+              <img src="../src/app/pages/img/search.png" alt="Søk" />
             </div>
-            <div className="shortcut">
+            <a className="shortcut" href="/files">
               <h3>Filer</h3>
-              <img src="../src/assets/img/pfp.jpg" alt="Filer" />
-            </div>
-            <div className="shortcut">
+              <img src="../src/app/pages/img/files.png" alt="Filer" />
+            </a>
+            <a className="shortcut" href="/idea">
               <h3>Idéer</h3>
-              <img src="../src/assets/img/pfp.jpg" alt="Idéer" />
-            </div>
+              <img src="../src/app/pages/img/ideas.png" alt="Ideer" />
+            </a>
           </div>
         </div>
       </div>

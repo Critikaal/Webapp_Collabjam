@@ -12,6 +12,25 @@ export const Document: React.FC<{ children: React.ReactNode }> = ({
       <title>Collabjam</title>
       <link rel="modulepreload" href="/src/client.tsx" />
       <link rel="icon" type="image/x-icon" href="../src/app/pages/img/logo.png"></link>
+      <link rel="preload" as="style" href="/src/app/pages/index.css" />
+      <link rel="stylesheet" href="/src/app/pages/index.css" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link
+        rel="preload"
+        as="style"
+        href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap"
+      />
+      <noscript>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap"
+        />
+      </noscript>
     </head>
     <body>
       <div id="root">
