@@ -8,6 +8,7 @@ function NavBar() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Collapse/expand the nav based on viewport width
     function checkMobile() {
       setIsMobile(window.innerWidth <= 600);
       if (window.innerWidth > 600) setMenuOpen(false);
@@ -24,9 +25,9 @@ function NavBar() {
     avatarKey: string;
   };
   
-  // 🔹 Nå peker vi direkte på filer i /public/avatars
+  // Static mapping to local avatar assets
   const avatarMap: Record<string, string> = {
-    pfp1: "/avatars/pfp1.jpg", // eller .jpg hvis det er filtype
+    pfp1: "/avatars/pfp1.jpg",
     pfp2: "/avatars/pfp2.jpg",
     pfp3: "/avatars/pfp3.jpg",
   };
@@ -34,6 +35,7 @@ function NavBar() {
   const [profile, setProfile] = useState<ProfileRow | null>(null);
 
   useEffect(() => {
+    // Fetch a random profile once on mount
     getRandomProfile().then((p) => {
       setProfile(p as ProfileRow);
     });

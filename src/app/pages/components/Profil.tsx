@@ -11,9 +11,8 @@ type ProfileRow = {
   avatarKey: string;
 };
 
-// 🔹 Nå peker vi direkte på filer i /public/avatars
 const avatarMap: Record<string, string> = {
-  pfp1: "/avatars/pfp1.jpg", // eller .jpg hvis det er filtype
+  pfp1: "/avatars/pfp1.jpg",
   pfp2: "/avatars/pfp2.jpg",
   pfp3: "/avatars/pfp3.jpg",
 };
@@ -22,6 +21,7 @@ export default function Profile() {
   const [profile, setProfile] = useState<ProfileRow | null>(null);
 
   useEffect(() => {
+    // Pull a random profile from the DB to fill the header
     getRandomProfile().then((p) => {
       setProfile(p as ProfileRow);
     });
